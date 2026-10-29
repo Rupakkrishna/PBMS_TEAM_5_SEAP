@@ -88,3 +88,11 @@ def test_unauthorized_endpoint_access(client, user1_token):
     res_post_station = client.post('/api/stations', json={'station_name': 'Hacker Station', 'location': 'Nowhere', 'capacity': 5}, headers=headers)
     assert res_post_station.status_code == 403
 
+def test_auth_security_tampered_token(client, user1_token):
+    """Test PB-18: Reject forged or tampered JWT bearer tokens."""
+    tampered = user1_token[:-5] + 'xxxxx'
+    res = client.get('/api/auth/me', headers={'Authorization': f'Bearer {tampered}'})
+    assert res.status_code == 401
+    assert 'invalid' in res.get_json()['error'].lower() or 'expired' in res.get_json()['error'].lower()
+
+
