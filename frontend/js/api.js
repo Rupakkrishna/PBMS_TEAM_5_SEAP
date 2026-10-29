@@ -112,7 +112,7 @@ function clearAlert(containerId) {
 
 function formatCurrency(amount) {
     const num = parseFloat(amount || 0);
-    return `$${num.toFixed(2)}`;
+    return `₹${num.toFixed(2)}`;
 }
 
 function formatDateTime(dateStr) {

@@ -174,3 +174,120 @@ footer {
     margin-bottom: 6px;
 }
 
+/* Jira & Agile Sprint Traceability Styling */
+.jira-badge-id {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-weight: 700;
+    font-size: 0.82rem;
+    background-color: #0284c7;
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+.jira-priority-highest {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
+    font-weight: 600;
+}
+
+.jira-priority-high {
+    background-color: #ffedd5;
+    color: #c2410c;
+    border: 1px solid #fdba74;
+    font-weight: 600;
+}
+
+.jira-priority-medium {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #7dd3fc;
+    font-weight: 600;
+}
+
+.jira-priority-low {
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    font-weight: 600;
+}
+
+.sp-badge {
+    background-color: #ede9fe;
+    color: #6d28d9;
+    border: 1px solid #c4b5fd;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+.sprint-header-card {
+    border-left: 5px solid var(--primary-color);
+    background: #ffffff;
+}
+
+.sprint-pill-btn {
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.sprint-pill-btn.active {
+    background-color: var(--primary-color) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+}
+
+.task-item-card {
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.task-item-card:hover {
+    border-color: #0d9488;
+    box-shadow: 0 6px 18px rgba(13, 148, 136, 0.12);
+    transform: translateY(-2px);
+}
+
+/* Password Strength Meter */
+.password-rule-item {
+    font-size: 0.82rem;
+    transition: color 0.2s ease;
+}
+
+.password-rule-item.valid {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.password-rule-item.invalid {
+    color: #94a3b8;
+}
+
+/* QA Console & Terminal Output */
+.qa-console-box {
+    background: #0f172a;
+    color: #38bdf8;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.85rem;
+    border-radius: 10px;
+    padding: 16px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.qa-log-step {
+    padding: 6px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.qa-log-step:last-child {
+    border-bottom: none;
+}
+
+
