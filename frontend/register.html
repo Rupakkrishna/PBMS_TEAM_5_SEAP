@@ -17,7 +17,8 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/index.html">
                 <i class="bi bi-bicycle brand-icon fs-3"></i>
-                <span>PBRMS</span>
+                <span class="ms-1">PBRMS</span>
+                <span class="badge bg-success bg-opacity-75 text-white ms-2 small">Registration</span>
             </a>
             <a href="/login.html" class="btn btn-outline-light btn-sm">Sign In</a>
         </div>
@@ -31,7 +32,7 @@
                     <div class="card-body p-4 p-md-5">
                         <div class="text-center mb-4">
                             <h3 class="fw-bold">Create an Account</h3>
-                            <p class="text-muted small">Join PBRMS as a Customer or register your fleet as a Rental Owner</p>
+                            <p class="text-muted small">Join PBRMS as a Commuter or register your fleet as a Rental Owner</p>
                         </div>
 
                         <!-- Role Navigation Tabs -->
@@ -63,11 +64,21 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="userPhone" class="form-label fw-semibold small">Phone Number</label>
-                                        <input type="tel" class="form-control" id="userPhone" placeholder="+1 555-0101" required>
+                                        <input type="tel" class="form-control" id="userPhone" placeholder="+91 98765-43210" required>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <label for="userPassword" class="form-label fw-semibold small">Password</label>
-                                        <input type="password" class="form-control" id="userPassword" placeholder="Minimum 6 characters" minlength="6" required>
+                                        <input type="password" class="form-control" id="userPassword" placeholder="Minimum 6 characters" minlength="6" required oninput="checkPasswordStrength('userPassword', 'userStrengthBar', 'userRules')">
+                                        
+                                        <!-- Real-time Password Strength Meter -->
+                                        <div class="progress mt-2" style="height: 5px;">
+                                            <div class="progress-bar bg-danger" id="userStrengthBar" role="progressbar" style="width: 0%"></div>
+                                        </div>
+                                        <div class="row g-1 mt-2 text-muted small" id="userRules">
+                                            <div class="col-6 password-rule-item" id="rule-len-user"><i class="bi bi-circle me-1"></i>6+ characters</div>
+                                            <div class="col-6 password-rule-item" id="rule-letter-user"><i class="bi bi-circle me-1"></i>Contains letters</div>
+                                            <div class="col-12 password-rule-item" id="rule-num-user"><i class="bi bi-circle me-1"></i>Contains number / symbol</div>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold" id="userRegisterBtn">
                                         Register as Customer
@@ -78,13 +89,18 @@
                             <!-- RENTAL OWNER REGISTRATION -->
                             <div class="tab-pane fade" id="ownerPane" role="tabpanel">
                                 <div class="alert alert-warning py-2 small mb-3">
-                                    <i class="bi bi-info-circle me-1"></i>
-                                    <strong>Note:</strong> Rental Owner registrations require Administrator approval before you can sign in and manage bicycles.
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-info-circle-fill text-warning fs-5 me-2"></i>
+                                        <div>
+                                            <strong>Verification Required:</strong>
+                                            Rental Owner registrations are verified and approved by the system administrator before fleet operations can begin.
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="ownerAlertContainer"></div>
                                 <form id="ownerRegisterForm">
                                     <div class="mb-3">
-                                        <label for="ownerName" class="form-label fw-semibold small">Business / Owner Name</label>
+                                        <label for="ownerName" class="form-label fw-semibold small">Business / Fleet Name</label>
                                         <input type="text" class="form-control" id="ownerName" placeholder="Metro Bikes Co." required>
                                     </div>
                                     <div class="mb-3">
@@ -93,15 +109,25 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="ownerPhone" class="form-label fw-semibold small">Phone Number</label>
-                                        <input type="tel" class="form-control" id="ownerPhone" placeholder="+1 555-0201" required>
+                                        <input type="tel" class="form-control" id="ownerPhone" placeholder="+91 98765-43211" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="ownerAddress" class="form-label fw-semibold small">Business Address</label>
-                                        <input type="text" class="form-control" id="ownerAddress" placeholder="123 Greenway Blvd, Downtown" required>
+                                        <input type="text" class="form-control" id="ownerAddress" placeholder="MG Road, Central Hub" required>
                                     </div>
-                                    <div class="mb-4">
+                                    <div class="mb-3">
                                         <label for="ownerPassword" class="form-label fw-semibold small">Password</label>
-                                        <input type="password" class="form-control" id="ownerPassword" placeholder="Minimum 6 characters" minlength="6" required>
+                                        <input type="password" class="form-control" id="ownerPassword" placeholder="Minimum 6 characters" minlength="6" required oninput="checkPasswordStrength('ownerPassword', 'ownerStrengthBar', 'ownerRules')">
+                                        
+                                        <!-- Real-time Password Strength Meter -->
+                                        <div class="progress mt-2" style="height: 5px;">
+                                            <div class="progress-bar bg-danger" id="ownerStrengthBar" role="progressbar" style="width: 0%"></div>
+                                        </div>
+                                        <div class="row g-1 mt-2 text-muted small" id="ownerRules">
+                                            <div class="col-6 password-rule-item" id="rule-len-owner"><i class="bi bi-circle me-1"></i>6+ characters</div>
+                                            <div class="col-6 password-rule-item" id="rule-letter-owner"><i class="bi bi-circle me-1"></i>Contains letters</div>
+                                            <div class="col-12 password-rule-item" id="rule-num-owner"><i class="bi bi-circle me-1"></i>Contains number / symbol</div>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-success w-100 py-2 fw-semibold" id="ownerRegisterBtn">
                                         Register as Rental Owner
@@ -125,6 +151,54 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/api.js"></script>
     <script src="/js/auth.js"></script>
+    <script>
+        function checkPasswordStrength(inputId, barId, rulesPrefix) {
+            const pwd = document.getElementById(inputId).value;
+            const bar = document.getElementById(barId);
+            const prefix = inputId === 'userPassword' ? 'user' : 'owner';
+
+            const ruleLen = document.getElementById(`rule-len-${prefix}`);
+            const ruleLetter = document.getElementById(`rule-letter-${prefix}`);
+            const ruleNum = document.getElementById(`rule-num-${prefix}`);
+
+            let score = 0;
+
+            if (pwd.length >= 6) {
+                score += 35;
+                ruleLen.className = 'col-6 password-rule-item valid';
+                ruleLen.innerHTML = '<i class="bi bi-check-circle-fill text-success me-1"></i>6+ characters';
+            } else {
+                ruleLen.className = 'col-6 password-rule-item invalid';
+                ruleLen.innerHTML = '<i class="bi bi-circle me-1"></i>6+ characters';
+            }
+
+            if (/[a-zA-Z]/.test(pwd)) {
+                score += 35;
+                ruleLetter.className = 'col-6 password-rule-item valid';
+                ruleLetter.innerHTML = '<i class="bi bi-check-circle-fill text-success me-1"></i>Contains letters';
+            } else {
+                ruleLetter.className = 'col-6 password-rule-item invalid';
+                ruleLetter.innerHTML = '<i class="bi bi-circle me-1"></i>Contains letters';
+            }
+
+            if (/[0-9!@#$%^&*(),.?":{}|<>]/.test(pwd)) {
+                score += 30;
+                ruleNum.className = 'col-12 password-rule-item valid';
+                ruleNum.innerHTML = '<i class="bi bi-check-circle-fill text-success me-1"></i>Contains number / symbol';
+            } else {
+                ruleNum.className = 'col-12 password-rule-item invalid';
+                ruleNum.innerHTML = '<i class="bi bi-circle me-1"></i>Contains number / symbol';
+            }
+
+            bar.style.width = `${score}%`;
+            if (score <= 35) {
+                bar.className = 'progress-bar bg-danger';
+            } else if (score < 100) {
+                bar.className = 'progress-bar bg-warning';
+            } else {
+                bar.className = 'progress-bar bg-success';
+            }
+        }
+    </script>
 </body>
 </html>
-
