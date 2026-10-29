@@ -33,8 +33,8 @@ def get_all_bicycles(station_id=None, status=None, owner_id=None, bicycle_type=N
     query += " ORDER BY b.bicycle_id DESC"
     return query_db(query, tuple(args))
 
-def get_available_bicycles(station_id=None, bicycle_type=None):
-    """Retrieve ONLY available bicycles with valid station assignment."""
+def get_available_bicycles(station_id=None, bicycle_type=None, search=None):
+    """Retrieve ONLY available bicycles with valid station assignment, with optional search filter."""
     query = """
         SELECT b.bicycle_id, b.bicycle_number, b.type, b.status, b.rental_rate,
                b.owner_id, b.station_id, b.created_at,
@@ -52,6 +52,10 @@ def get_available_bicycles(station_id=None, bicycle_type=None):
     if bicycle_type:
         query += " AND b.type = %s"
         args.append(bicycle_type)
+    if search:
+        search_pattern = f"%{search.strip()}%"
+        query += " AND (b.bicycle_number LIKE %s OR s.station_name LIKE %s OR s.location LIKE %s OR b.type LIKE %s)"
+        args.extend([search_pattern, search_pattern, search_pattern, search_pattern])
 
     query += " ORDER BY b.rental_rate ASC"
     return query_db(query, tuple(args))

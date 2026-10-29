@@ -59,7 +59,15 @@ async function loadOwnerBicycles() {
             return;
         }
 
-        tableBody.innerHTML = bikes.map(b => `
+        tableBody.innerHTML = bikes.map(b => {
+            let maintBtn = '';
+            if (b.status === 'Available') {
+                maintBtn = `<button class="btn btn-sm btn-outline-warning me-1" onclick="quickToggleMaintenance(${b.bicycle_id}, 'Maintenance')" title="Mark Maintenance"><i class="bi bi-wrench"></i></button>`;
+            } else if (b.status === 'Maintenance') {
+                maintBtn = `<button class="btn btn-sm btn-outline-success me-1" onclick="quickToggleMaintenance(${b.bicycle_id}, 'Available')" title="Mark Available"><i class="bi bi-check-circle"></i></button>`;
+            }
+
+            return `
             <tr>
                 <td><strong>${b.bicycle_number}</strong></td>
                 <td><span class="badge bg-light text-dark border">${b.type}</span></td>
@@ -68,17 +76,29 @@ async function loadOwnerBicycles() {
                 <td>${b.station_name || '<em class="text-muted">None (In Transit / Storage)</em>'}</td>
                 <td><small class="text-muted">${formatDateTime(b.created_at)}</small></td>
                 <td class="text-end">
+                    ${maintBtn}
                     <button class="btn btn-sm btn-outline-primary me-1" onclick="openEditBikeModal(${b.bicycle_id}, '${b.type}', ${b.rental_rate}, '${b.status}', ${b.station_id || 'null'})">
-                        <i class="bi bi-pencil me-1"></i> Edit / Assign
+                        <i class="bi bi-pencil me-1"></i> Edit
                     </button>
                     <button class="btn btn-sm btn-outline-danger" onclick="deleteBike(${b.bicycle_id})" ${b.status === 'Rented' ? 'disabled title="Cannot delete rented bike"' : ''}>
                         <i class="bi bi-trash"></i>
                     </button>
                 </td>
             </tr>
-        `).join('');
+            `;
+        }).join('');
     } catch (err) {
         console.error('Failed to load owner bicycles:', err);
+    }
+}
+
+// Quick status toggle for PB-10
+async function quickToggleMaintenance(bikeId, newStatus) {
+    try {
+        await api.put(`/bicycles/${bikeId}`, { status: newStatus });
+        await loadOwnerBicycles();
+    } catch (err) {
+        alert(err.message || 'Failed to update bicycle status.');
     }
 }
 
