@@ -49,14 +49,14 @@ def seed_database():
 
         # 5. Bicycles
         bikes = [
-            (1, 'BK-101', 'City', 'Available', 5.00, 1, 1),
-            (2, 'BK-102', 'City', 'Available', 5.00, 1, 1),
-            (3, 'BK-103', 'Road', 'Available', 7.50, 1, 2),
-            (4, 'BK-104', 'Electric', 'Available', 10.00, 1, 2),
-            (5, 'BK-105', 'Mountain', 'Available', 8.00, 1, 3),
-            (6, 'BK-106', 'Electric', 'Rented', 12.00, 1, None),
-            (7, 'BK-107', 'Hybrid', 'Maintenance', 6.00, 1, 3),
-            (8, 'BK-108', 'Road', 'Inactive', 7.00, 1, None)
+            (1, 'BK-101', 'City', 'Available', 20.00, 1, 1),
+            (2, 'BK-102', 'City', 'Available', 20.00, 1, 1),
+            (3, 'BK-103', 'Road', 'Available', 30.00, 1, 2),
+            (4, 'BK-104', 'Electric', 'Available', 40.00, 1, 2),
+            (5, 'BK-105', 'Mountain', 'Available', 35.00, 1, 3),
+            (6, 'BK-106', 'Electric', 'Rented', 45.00, 1, None),
+            (7, 'BK-107', 'Hybrid', 'Maintenance', 25.00, 1, 3),
+            (8, 'BK-108', 'Road', 'Inactive', 30.00, 1, None)
         ]
         for b in bikes:
             execute_db("INSERT INTO bicycle (bicycle_id, bicycle_number, type, status, rental_rate, owner_id, station_id) VALUES (%s, %s, %s, %s, %s, %s, %s)", b)
@@ -64,7 +64,7 @@ def seed_database():
         # 6. Rentals
         execute_db(
             "INSERT INTO rental (rental_id, user_id, bicycle_id, start_station_id, return_station_id, start_time, return_time, duration, fare, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-            (1, 2, 1, 1, 1, '2026-09-20 10:00:00', '2026-09-20 12:00:00', 2.00, 10.00, 'Completed')
+            (1, 2, 1, 1, 1, '2026-09-20 10:00:00', '2026-09-20 12:00:00', 2.00, 40.00, 'Completed')
         )
         execute_db(
             "INSERT INTO rental (rental_id, user_id, bicycle_id, start_station_id, return_station_id, start_time, return_time, duration, fare, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
@@ -74,7 +74,7 @@ def seed_database():
         # 7. Payments
         execute_db(
             "INSERT INTO payment (payment_id, rental_id, amount, status, payment_date) VALUES (%s, %s, %s, %s, %s)",
-            (1, 1, 10.00, 'Paid', '2026-09-20 12:01:00')
+            (1, 1, 40.00, 'Paid', '2026-09-20 12:01:00')
         )
 
         print("Database seeded successfully with demo accounts, stations, and bicycles.")

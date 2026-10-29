@@ -27,6 +27,13 @@ def create_app(config_name=None):
     # Teardown database connection
     app.teardown_appcontext(close_db)
 
+    # Initialize SQLAlchemy Extension
+    from backend.extensions import db
+    db.init_app(app)
+
+    # Import ORM models for registry
+    from backend.models import User, Admin, RentalOwner, Station, Bicycle, Rental, Payment
+
     # Register Blueprints
     from backend.routes.auth_routes import auth_bp
     from backend.routes.station_routes import station_bp
@@ -34,6 +41,7 @@ def create_app(config_name=None):
     from backend.routes.rental_routes import rental_bp
     from backend.routes.payment_routes import payment_bp
     from backend.routes.admin_routes import admin_bp
+    from backend.routes.qa_routes import qa_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(station_bp)
@@ -41,6 +49,7 @@ def create_app(config_name=None):
     app.register_blueprint(rental_bp)
     app.register_blueprint(payment_bp)
     app.register_blueprint(admin_bp)
+    app.register_blueprint(qa_bp)
 
     # Frontend Static Serving Routes
     @app.route('/')
