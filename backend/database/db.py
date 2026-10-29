@@ -25,7 +25,7 @@ def get_db():
             g.db = pymysql.connect(
                 host=current_app.config.get('DB_HOST', '127.0.0.1'),
                 port=current_app.config.get('DB_PORT', 3306),
-                user=current_app.config.get('DB_USER', 'root'),
+                user=current_app.config.get('DB_USER', 'pbrms_user'),
                 password=current_app.config.get('DB_PASSWORD', ''),
                 database=current_app.config.get('DB_NAME', 'pbrms_db'),
                 charset='utf8mb4',

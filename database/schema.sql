@@ -1,22 +1,13 @@
 -- =======================================================
 -- PUBLIC BICYCLE RENTAL MANAGEMENT SYSTEM (PBRMS)
--- Database Schema: MySQL 8
+-- Safe, Idempotent Database Schema: MySQL 8
 -- =======================================================
 
 CREATE DATABASE IF NOT EXISTS pbrms_db;
 USE pbrms_db;
 
--- Drop tables in reverse order of foreign key dependencies
-DROP TABLE IF EXISTS payment;
-DROP TABLE IF EXISTS rental;
-DROP TABLE IF EXISTS bicycle;
-DROP TABLE IF EXISTS station;
-DROP TABLE IF EXISTS rental_owner;
-DROP TABLE IF EXISTS `user`;
-DROP TABLE IF EXISTS `admin`;
-
 -- 1. ADMIN TABLE
-CREATE TABLE `admin` (
+CREATE TABLE IF NOT EXISTS `admin` (
     admin_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -25,7 +16,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 2. USER (CUSTOMER) TABLE
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -35,7 +26,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 3. RENTAL OWNER TABLE
-CREATE TABLE rental_owner (
+CREATE TABLE IF NOT EXISTS rental_owner (
     owner_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -47,7 +38,7 @@ CREATE TABLE rental_owner (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 4. STATION TABLE
-CREATE TABLE station (
+CREATE TABLE IF NOT EXISTS station (
     station_id INT AUTO_INCREMENT PRIMARY KEY,
     station_name VARCHAR(100) NOT NULL,
     location VARCHAR(255) NOT NULL,
@@ -59,7 +50,7 @@ CREATE TABLE station (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 5. BICYCLE TABLE
-CREATE TABLE bicycle (
+CREATE TABLE IF NOT EXISTS bicycle (
     bicycle_id INT AUTO_INCREMENT PRIMARY KEY,
     bicycle_number VARCHAR(50) NOT NULL UNIQUE,
     type VARCHAR(50) NOT NULL,
@@ -74,7 +65,7 @@ CREATE TABLE bicycle (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 6. RENTAL TABLE
-CREATE TABLE rental (
+CREATE TABLE IF NOT EXISTS rental (
     rental_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     bicycle_id INT NOT NULL,
@@ -93,7 +84,7 @@ CREATE TABLE rental (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 7. PAYMENT TABLE
-CREATE TABLE payment (
+CREATE TABLE IF NOT EXISTS payment (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
     rental_id INT NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
@@ -103,12 +94,3 @@ CREATE TABLE payment (
     CONSTRAINT chk_payment_amount CHECK (amount >= 0),
     CONSTRAINT fk_payment_rental FOREIGN KEY (rental_id) REFERENCES rental (rental_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- INDEXES FOR PERFORMANCE & LOOKUPS
-CREATE INDEX idx_bicycle_status ON bicycle (status);
-CREATE INDEX idx_bicycle_station ON bicycle (station_id);
-CREATE INDEX idx_rental_user ON rental (user_id);
-CREATE INDEX idx_rental_status ON rental (status);
-CREATE INDEX idx_payment_rental ON payment (rental_id);
-CREATE INDEX idx_owner_approval ON rental_owner (approval_status);
-
