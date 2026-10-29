@@ -16,6 +16,21 @@ def test_bicycle_availability(client):
     for b in bikes:
         assert b['status'] == 'Available'
 
+def test_bicycle_search_keyword_filter(client):
+    """Test PB-19 & PB-11: Bicycle search with station and keyword query filtering."""
+    # Search by keyword 'TEST-101'
+    res = client.get('/api/bicycles/available?search=TEST-101')
+    assert res.status_code == 200
+    bikes = res.get_json()
+    assert len(bikes) >= 1
+    assert any(b['bicycle_number'] == 'TEST-101' for b in bikes)
+
+    # Search with nonexistent keyword returns empty list
+    res_empty = client.get('/api/bicycles/available?search=NONEXISTENT_BIKE_XYZ')
+    assert res_empty.status_code == 200
+    assert len(res_empty.get_json()) == 0
+
+
 def test_bicycle_status_transition(client, owner_token):
     """Test 9: Bicycle status transitions (Available -> Maintenance -> Available)."""
     headers = {'Authorization': f'Bearer {owner_token}'}
