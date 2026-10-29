@@ -26,11 +26,12 @@ def list_bicycles():
 
 @bicycle_bp.route('/available', methods=['GET'])
 def list_available_bicycles():
-    """List only available bicycles."""
+    """List only available bicycles with optional filters and keyword search."""
     station_id = request.args.get('station_id', type=int)
     bicycle_type = request.args.get('type')
+    search = request.args.get('search') or request.args.get('q')
 
-    bikes = get_available_bicycles(station_id=station_id, bicycle_type=bicycle_type)
+    bikes = get_available_bicycles(station_id=station_id, bicycle_type=bicycle_type, search=search)
     return jsonify(bikes), 200
 
 @bicycle_bp.route('/<int:bicycle_id>', methods=['GET'])
