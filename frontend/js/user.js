@@ -20,6 +20,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadRentalHistory();
 
     // 3. Setup event listeners
+    const searchInput = document.getElementById('bikeSearchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', () => loadAvailableBicycles());
+    }
     document.getElementById('stationFilter').addEventListener('change', () => loadAvailableBicycles());
     document.getElementById('typeFilter').addEventListener('change', () => loadAvailableBicycles());
 });
@@ -78,9 +82,11 @@ function renderActiveRentalBanner(rental) {
         <div class="active-rental-banner">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-3 mb-lg-0">
-                    <span class="badge bg-warning text-dark px-3 py-1 mb-2 fw-semibold">
-                        <i class="bi bi-clock-history me-1"></i> ACTIVE RENTAL IN PROGRESS
-                    </span>
+                    <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                        <span class="badge bg-warning text-dark px-3 py-1 fw-semibold">
+                            <i class="bi bi-clock-history me-1"></i> ACTIVE RENTAL IN PROGRESS
+                        </span>
+                    </div>
                     <h3 class="fw-bold text-white mb-1">
                         Bicycle: ${rental.bicycle_number} <span class="badge bg-light text-dark fs-6">${rental.bicycle_type}</span>
                     </h3>
@@ -90,7 +96,7 @@ function renderActiveRentalBanner(rental) {
                     </p>
                 </div>
                 <div class="col-lg-4 text-center text-lg-start mb-3 mb-lg-0">
-                    <small class="text-uppercase text-light opacity-75 fw-semibold d-block">Elapsed Duration</small>
+                    <small class="text-uppercase text-light opacity-75 fw-semibold d-block">Elapsed Ride Duration</small>
                     <div class="rental-timer text-warning" id="liveTimerDisplay">00:00:00</div>
                     <small class="text-light opacity-90">Estimated Fare: <strong id="liveFareDisplay">${formatCurrency(rental.rental_rate)}</strong> (min 1 hr)</small>
                 </div>
@@ -140,12 +146,15 @@ function startRentalTimer(startTimeStr, hourlyRate) {
 async function loadAvailableBicycles() {
     const stationId = document.getElementById('stationFilter').value;
     const type = document.getElementById('typeFilter').value;
+    const searchInput = document.getElementById('bikeSearchInput');
+    const search = searchInput ? searchInput.value.trim() : '';
     const container = document.getElementById('bicyclesList');
 
     try {
         let url = '/bicycles/available?';
         if (stationId) url += `station_id=${stationId}&`;
         if (type) url += `type=${type}&`;
+        if (search) url += `search=${encodeURIComponent(search)}&`;
 
         const bikes = await api.get(url);
 
