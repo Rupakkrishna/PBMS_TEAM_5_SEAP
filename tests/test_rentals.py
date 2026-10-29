@@ -38,6 +38,20 @@ def test_prevent_double_rental(client, user1_token, user2_token):
     assert res2.status_code == 400
     assert 'not available' in res2.get_json()['error'].lower() or 'already rented' in res2.get_json()['error'].lower()
 
+def test_prevent_user_multiple_active_rentals(client, user1_token):
+    """Test PB-20 & PB-13: Prevent a single user from renting multiple bikes simultaneously."""
+    headers = {'Authorization': f'Bearer {user1_token}'}
+
+    # User 1 rents bike 1
+    res1 = client.post('/api/rentals', json={'bicycle_id': 1}, headers=headers)
+    assert res1.status_code == 201
+
+    # User 1 attempts to rent bike 2 while bike 1 is still active
+    res2 = client.post('/api/rentals', json={'bicycle_id': 2}, headers=headers)
+    assert res2.status_code == 400
+    assert 'active rental' in res2.get_json()['error'].lower()
+
+
 def test_return_bicycle(client, user1_token):
     """Test 7: Return bicycle, calculate fare, update status, and record payment."""
     headers = {'Authorization': f'Bearer {user1_token}'}

@@ -52,7 +52,7 @@ The **Public Bicycle Rental Management System (PBRMS)** provides an end-to-end p
 - **Database**: MySQL 8 relational schema with foreign key constraints, checks, transactions, and row-locking. Includes automatic zero-config SQLite fallback for isolated automated tests and portable zero-dependency execution.
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+), Bootstrap 5, Bootstrap Icons. Fully responsive across desktop, tablet, and mobile.
 - **Authentication**: Secure password hashing with `bcrypt` (salt generation, 12 rounds), JSON Web Tokens (`HS256`), server-side role-based access control (`@role_required`).
-- **Testing & QA**: `pytest` test suite (32 passed tests), `pytest-cov` for branch and line coverage, `Radon` for cyclomatic complexity and maintainability index, and `Selenium` Headless Chrome for UI automation.
+- **Testing & QA**: `pytest` test suite (35 passed tests), `pytest-cov` for branch and line coverage, `Radon` for cyclomatic complexity and maintainability index, and `Selenium` Headless Chrome for UI automation.
 - **DevOps**: Declarative `Jenkinsfile`, `.gitignore`, `requirements.txt`, `.env.example`.
 
 ---
@@ -375,14 +375,14 @@ All 24 user stories across 4 Sprints are fully implemented and verified. For det
 | **Sprint 4** | `PB-21` | Generate Code Coverage Report | Medium | 3 | Complete | `pytest-cov`, `reports/coverage.txt`, `reports/coverage_html/` |
 | **Sprint 4** | `PB-22` | Perform Cyclomatic Complexity Analysis | Low | 2 | Complete | `Radon` CC/MI analysis, `reports/complexity.txt` |
 | **Sprint 4** | `PB-23` | Automate a Key UI Workflow | Medium | 5 | Complete | `tests/ui/test_ui_selenium.py`, `tests/test_ui_workflow.py` |
-| **Sprint 4** | `PB-24` | Fix Defects and Perform Integration Testing | Highest | 5 | Complete | 32/32 tests passing, integration verification in `reports/` |
+| **Sprint 4** | `PB-24` | Fix Defects and Perform Integration Testing | Highest | 5 | Complete | 35/35 tests passing, integration verification in `reports/` |
 | **Total** | | **All 4 Sprints · 24 Backlog Items** | | **97 SP** | **100% Done** | |
 
 ---
 
 ## Testing, Coverage & QA Reports
 
-### 1. Run Complete Test Suite (32 Tests)
+### 1. Run Complete Test Suite (35 Tests)
 ```powershell
 python -m pytest tests/ -v
 ```
