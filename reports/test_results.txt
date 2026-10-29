@@ -1,0 +1,41 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.5, pytest-8.1.1, pluggy-1.6.0 -- C:\Users\USER\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\USER\Seap
+plugins: cov-7.1.0
+collecting ... collected 32 items
+
+tests/test_admin.py::test_admin_dashboard_metrics PASSED                 [  3%]
+tests/test_admin.py::test_admin_dashboard_unauthorized PASSED            [  6%]
+tests/test_admin.py::test_admin_list_users PASSED                        [  9%]
+tests/test_admin.py::test_admin_list_owners PASSED                       [ 12%]
+tests/test_admin.py::test_admin_approve_and_reject_owner PASSED          [ 15%]
+tests/test_auth.py::test_user_registration PASSED                        [ 18%]
+tests/test_auth.py::test_rental_owner_registration PASSED                [ 21%]
+tests/test_auth.py::test_login_success PASSED                            [ 25%]
+tests/test_auth.py::test_invalid_login PASSED                            [ 28%]
+tests/test_auth.py::test_unauthorized_endpoint_access PASSED             [ 31%]
+tests/test_bicycles.py::test_bicycle_availability PASSED                 [ 34%]
+tests/test_bicycles.py::test_bicycle_status_transition PASSED            [ 37%]
+tests/test_bicycles.py::test_station_availability_update_and_capacity PASSED [ 40%]
+tests/test_fare.py::test_fare_calculation PASSED                         [ 43%]
+tests/test_fare.py::test_fare_zero_duration PASSED                       [ 46%]
+tests/test_mysql_migration.py::test_mysql_connection_and_models PASSED   [ 50%]
+tests/test_qa.py::test_qa_backlog_endpoint PASSED                        [ 53%]
+tests/test_qa.py::test_qa_complexity_endpoint PASSED                     [ 56%]
+tests/test_qa.py::test_qa_coverage_endpoint PASSED                       [ 59%]
+tests/test_qa.py::test_qa_run_workflow_endpoint PASSED                   [ 62%]
+tests/test_rentals.py::test_bicycle_rental_lifecycle PASSED              [ 65%]
+tests/test_rentals.py::test_prevent_double_rental PASSED                 [ 68%]
+tests/test_rentals.py::test_return_bicycle PASSED                        [ 71%]
+tests/test_rentals.py::test_return_bicycle_capacity_limit PASSED         [ 75%]
+tests/test_stations.py::test_list_stations PASSED                        [ 78%]
+tests/test_stations.py::test_get_station_by_id PASSED                    [ 81%]
+tests/test_stations.py::test_get_station_bicycles PASSED                 [ 84%]
+tests/test_stations.py::test_create_station_admin PASSED                 [ 87%]
+tests/test_stations.py::test_create_station_unauthorized PASSED          [ 90%]
+tests/test_stations.py::test_update_and_delete_station PASSED            [ 93%]
+tests/test_ui_workflow.py::test_automated_key_ui_workflow PASSED         [ 96%]
+tests/ui/test_ui_selenium.py::test_selenium_key_ui_workflow PASSED       [100%]
+
+============================= 32 passed in 33.46s =============================

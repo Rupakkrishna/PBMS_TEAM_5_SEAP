@@ -1,0 +1,468 @@
+=== RADON CYCLOMATIC COMPLEXITY (backend) ===
+backend\app.py
+    F 12:0 create_app - A (2)
+backend\config.py
+    C 8:0 Config - A (2)
+    C 31:0 DevelopmentConfig - A (1)
+    C 36:0 TestingConfig - A (1)
+    C 45:0 ProductionConfig - A (1)
+backend\database\db.py
+    F 122:0 init_db_schema - B (9)
+    F 67:0 query_db - B (7)
+    F 8:0 get_db - B (6)
+    F 86:0 execute_db - A (4)
+    F 50:0 close_db - A (2)
+    F 56:0 _adapt_query - A (2)
+    F 111:0 transaction_scope - A (2)
+backend\database\seed.py
+    F 6:0 seed_database - B (6)
+backend\models\bicycle.py
+    C 4:0 Bicycle - B (7)
+    M 19:4 Bicycle.to_dict - B (6)
+backend\models\payment.py
+    C 4:0 Payment - A (5)
+    M 14:4 Payment.to_dict - A (4)
+backend\models\rental.py
+    C 4:0 Rental - C (16)
+    M 21:4 Rental.to_dict - C (15)
+backend\models\station.py
+    C 4:0 Station - A (3)
+    M 19:4 Station.to_dict - A (2)
+backend\models\user.py
+    C 4:0 Admin - A (3)
+    C 22:0 User - A (3)
+    C 45:0 RentalOwner - A (3)
+    M 13:4 Admin.to_dict - A (2)
+    M 35:4 User.to_dict - A (2)
+    M 60:4 RentalOwner.to_dict - A (2)
+backend\routes\admin_routes.py
+    F 86:0 set_owner_status - A (4)
+    F 9:0 get_dashboard_stats - A (3)
+    F 72:0 list_owners - A (2)
+    F 65:0 list_users - A (1)
+backend\routes\auth_routes.py
+    F 9:0 register - C (11)
+    F 52:0 login - A (4)
+    F 75:0 get_me - A (2)
+    F 69:0 logout - A (1)
+backend\routes\bicycle_routes.py
+    F 90:0 edit_bicycle - C (12)
+    F 47:0 add_bicycle - B (9)
+    F 28:0 list_available_bicycles - A (2)
+    F 38:0 get_bicycle - A (2)
+    F 129:0 remove_bicycle - A (2)
+    F 12:0 list_bicycles - A (1)
+backend\routes\payment_routes.py
+    F 36:0 process_payment - A (5)
+    F 23:0 get_payment - A (4)
+    F 9:0 list_payments - A (3)
+backend\routes\qa_routes.py
+    F 459:0 run_automated_workflow - C (16)
+    F 313:0 calculate_complexity_for_file - B (10)
+    F 356:0 get_backlog - B (10)
+    F 380:0 get_complexity_analysis - B (8)
+    F 423:0 get_coverage_report - A (3)
+backend\routes\rental_routes.py
+    F 13:0 create_rental - A (5)
+    F 42:0 return_rented_bicycle - A (5)
+    F 70:0 get_rental - A (4)
+    F 84:0 list_rentals - A (3)
+    F 33:0 get_active_rental - A (2)
+backend\routes\station_routes.py
+    F 36:0 add_station - A (5)
+    F 59:0 edit_station - A (5)
+    F 18:0 get_station - A (2)
+    F 26:0 get_station_bicycles - A (2)
+    F 83:0 remove_station - A (2)
+    F 12:0 list_stations - A (1)
+backend\services\auth_service.py
+    F 73:0 login_user - B (9)
+    F 17:0 check_email_exists - A (4)
+    F 121:0 get_current_user_profile - A (4)
+    F 10:0 check_password - A (2)
+    F 30:0 register_user - A (2)
+    F 51:0 register_owner - A (2)
+    F 5:0 hash_password - A (1)
+backend\services\bicycle_service.py
+    F 107:0 update_bicycle - D (21)
+    F 77:0 create_bicycle - B (8)
+    F 158:0 delete_bicycle - B (6)
+    F 7:0 get_all_bicycles - A (5)
+    F 36:0 get_available_bicycles - A (4)
+    F 63:0 get_bicycle_by_id - A (1)
+backend\services\payment_service.py
+    F 52:0 update_payment_status - A (3)
+    F 5:0 get_all_payments - A (2)
+    F 26:0 get_payment_by_id - A (1)
+    F 41:0 get_payment_by_rental_id - A (1)
+backend\services\rental_service.py
+    F 94:0 return_bicycle - B (8)
+    F 34:0 rent_bicycle - B (6)
+    F 6:0 calculate_fare - A (5)
+    F 195:0 get_all_rentals - A (4)
+    F 161:0 get_rental_by_id - A (1)
+    F 181:0 get_user_active_rental - A (1)
+backend\services\station_service.py
+    F 51:0 delete_station - A (4)
+    F 36:0 update_station - A (3)
+    F 25:0 create_station - A (2)
+    F 68:0 recalculate_station_bicycles - A (2)
+    F 3:0 get_all_stations - A (1)
+    F 14:0 get_station_by_id - A (1)
+backend\utils\auth_middleware.py
+    F 19:0 decode_token - A (3)
+    F 50:0 role_required - A (2)
+    F 6:0 generate_token - A (1)
+    F 29:0 token_required - A (1)
+backend\utils\validators.py
+    F 32:0 validate_required - B (8)
+    F 45:0 validate_positive_number - A (5)
+    F 6:0 validate_email - A (4)
+    F 15:0 validate_password - A (4)
+    F 23:0 validate_phone - A (4)
+
+98 blocks (classes, functions, methods) analyzed.
+Average complexity: A (4.23469387755102)
+
+
+=== RADON MAINTAINABILITY INDEX (backend) ===
+backend\app.py - A (62.96)
+backend\config.py - A (77.68)
+backend\extensions.py - A (100.00)
+backend\database\db.py - A (49.76)
+backend\database\seed.py - A (81.47)
+backend\models\bicycle.py - A (79.40)
+backend\models\payment.py - A (70.29)
+backend\models\rental.py - A (68.35)
+backend\models\station.py - A (100.00)
+backend\models\user.py - A (100.00)
+backend\models\__init__.py - A (100.00)
+backend\routes\admin_routes.py - A (61.49)
+backend\routes\auth_routes.py - A (42.99)
+backend\routes\bicycle_routes.py - A (41.82)
+backend\routes\payment_routes.py - A (47.96)
+backend\routes\qa_routes.py - A (40.18)
+backend\routes\rental_routes.py - A (51.13)
+backend\routes\station_routes.py - A (44.73)
+backend\services\auth_service.py - A (52.92)
+backend\services\bicycle_service.py - A (42.35)
+backend\services\payment_service.py - A (57.09)
+backend\services\rental_service.py - A (59.14)
+backend\services\station_service.py - A (51.40)
+backend\utils\auth_middleware.py - A (48.84)
+backend\utils\validators.py - A (42.94)
+
+
+=== RADON RAW METRICS (backend) ===
+backend\app.py
+    LOC: 115
+    LLOC: 87
+    SLOC: 83
+    Comments: 10
+    Single comments: 11
+    Multi: 0
+    Blank: 21
+    - Comment Stats
+        (C % L): 9%
+        (C % S): 12%
+        (C + M % L): 9%
+backend\config.py
+    LOC: 55
+    LLOC: 38
+    SLOC: 38
+    Comments: 5
+    Single comments: 8
+    Multi: 0
+    Blank: 9
+    - Comment Stats
+        (C % L): 9%
+        (C % S): 13%
+        (C + M % L): 9%
+backend\extensions.py
+    LOC: 4
+    LLOC: 2
+    SLOC: 2
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 2
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+backend\database\db.py
+    LOC: 243
+    LLOC: 121
+    SLOC: 207
+    Comments: 8
+    Single comments: 15
+    Multi: 0
+    Blank: 21
+    - Comment Stats
+        (C % L): 3%
+        (C % S): 4%
+        (C + M % L): 3%
+backend\database\seed.py
+    LOC: 84
+    LLOC: 31
+    SLOC: 63
+    Comments: 8
+    Single comments: 9
+    Multi: 0
+    Blank: 12
+    - Comment Stats
+        (C % L): 10%
+        (C % S): 13%
+        (C + M % L): 10%
+backend\models\bicycle.py
+    LOC: 33
+    LLOC: 16
+    SLOC: 27
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 3%
+        (C % S): 4%
+        (C + M % L): 3%
+backend\models\payment.py
+    LOC: 23
+    LLOC: 13
+    SLOC: 19
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 4
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+backend\models\rental.py
+    LOC: 42
+    LLOC: 18
+    SLOC: 36
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 2%
+        (C % S): 3%
+        (C + M % L): 2%
+backend\models\station.py
+    LOC: 28
+    LLOC: 16
+    SLOC: 22
+    Comments: 1
+    Single comments: 1
+    Multi: 0
+    Blank: 5
+    - Comment Stats
+        (C % L): 4%
+        (C % S): 5%
+        (C + M % L): 4%
+backend\models\user.py
+    LOC: 71
+    LLOC: 38
+    SLOC: 57
+    Comments: 2
+    Single comments: 2
+    Multi: 0
+    Blank: 12
+    - Comment Stats
+        (C % L): 3%
+        (C % S): 4%
+        (C + M % L): 3%
+backend\models\__init__.py
+    LOC: 16
+    LLOC: 6
+    SLOC: 14
+    Comments: 0
+    Single comments: 0
+    Multi: 0
+    Blank: 2
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+backend\routes\admin_routes.py
+    LOC: 103
+    LLOC: 60
+    SLOC: 80
+    Comments: 5
+    Single comments: 9
+    Multi: 0
+    Blank: 14
+    - Comment Stats
+        (C % L): 5%
+        (C % S): 6%
+        (C + M % L): 5%
+backend\routes\auth_routes.py
+    LOC: 81
+    LLOC: 75
+    SLOC: 60
+    Comments: 0
+    Single comments: 4
+    Multi: 0
+    Blank: 17
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+backend\routes\bicycle_routes.py
+    LOC: 140
+    LLOC: 101
+    SLOC: 111
+    Comments: 1
+    Single comments: 7
+    Multi: 0
+    Blank: 22
+    - Comment Stats
+        (C % L): 1%
+        (C % S): 1%
+        (C + M % L): 1%
+backend\routes\payment_routes.py
+    LOC: 50
+    LLOC: 45
+    SLOC: 36
+    Comments: 0
+    Single comments: 3
+    Multi: 0
+    Blank: 11
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+backend\routes\qa_routes.py
+    LOC: 579
+    LLOC: 168
+    SLOC: 517
+    Comments: 15
+    Single comments: 15
+    Multi: 13
+    Blank: 34
+    - Comment Stats
+        (C % L): 3%
+        (C % S): 3%
+        (C + M % L): 5%
+backend\routes\rental_routes.py
+    LOC: 97
+    LLOC: 80
+    SLOC: 73
+    Comments: 2
+    Single comments: 6
+    Multi: 0
+    Blank: 18
+    - Comment Stats
+        (C % L): 2%
+        (C % S): 3%
+        (C + M % L): 2%
+backend\routes\station_routes.py
+    LOC: 89
+    LLOC: 74
+    SLOC: 69
+    Comments: 0
+    Single comments: 6
+    Multi: 0
+    Blank: 14
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+backend\services\auth_service.py
+    LOC: 132
+    LLOC: 77
+    SLOC: 108
+    Comments: 3
+    Single comments: 10
+    Multi: 0
+    Blank: 14
+    - Comment Stats
+        (C % L): 2%
+        (C % S): 3%
+        (C + M % L): 2%
+backend\services\bicycle_service.py
+    LOC: 177
+    LLOC: 106
+    SLOC: 139
+    Comments: 6
+    Single comments: 12
+    Multi: 0
+    Blank: 26
+    - Comment Stats
+        (C % L): 3%
+        (C % S): 4%
+        (C + M % L): 3%
+backend\services\payment_service.py
+    LOC: 66
+    LLOC: 28
+    SLOC: 53
+    Comments: 0
+    Single comments: 4
+    Multi: 0
+    Blank: 9
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+backend\services\rental_service.py
+    LOC: 226
+    LLOC: 88
+    SLOC: 167
+    Comments: 14
+    Single comments: 17
+    Multi: 11
+    Blank: 31
+    - Comment Stats
+        (C % L): 6%
+        (C % S): 8%
+        (C + M % L): 11%
+backend\services\station_service.py
+    LOC: 78
+    LLOC: 40
+    SLOC: 60
+    Comments: 0
+    Single comments: 6
+    Multi: 0
+    Blank: 12
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+backend\utils\auth_middleware.py
+    LOC: 67
+    LLOC: 54
+    SLOC: 54
+    Comments: 0
+    Single comments: 4
+    Multi: 0
+    Blank: 9
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+backend\utils\validators.py
+    LOC: 58
+    LLOC: 51
+    SLOC: 46
+    Comments: 0
+    Single comments: 5
+    Multi: 0
+    Blank: 7
+    - Comment Stats
+        (C % L): 0%
+        (C % S): 0%
+        (C + M % L): 0%
+** Total **
+    LOC: 2657
+    LLOC: 1433
+    SLOC: 2141
+    Comments: 82
+    Single comments: 156
+    Multi: 24
+    Blank: 336
+    - Comment Stats
+        (C % L): 3%
+        (C % S): 4%
+        (C + M % L): 4%
