@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About & Service Overview - PBRMS</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-pbrms sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/index.html">
+                <i class="bi bi-bicycle brand-icon fs-3"></i>
+                <span class="ms-1">PBRMS</span>
+                <span class="badge bg-success bg-opacity-75 text-white ms-2 small">About</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/stations.html">Stations & Bicycles</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/about.html">About & Pricing</a></li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <a href="/login.html" class="btn btn-outline-light btn-sm px-3">Sign In</a>
+                    <a href="/register.html" class="btn btn-primary btn-sm px-3">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content py-5">
+        <div class="container">
+            <!-- Header Banner -->
+            <div class="text-center mb-5">
+                <span class="badge bg-primary px-3 py-2 rounded-pill fw-semibold mb-2">
+                    <i class="bi bi-info-circle me-1"></i> Public Bicycle Rental Management System
+                </span>
+                <h1 class="display-5 fw-bold">Platform Overview & Service Guide</h1>
+                <p class="lead text-muted mx-auto" style="max-width: 750px;">
+                    A scalable mobility platform designed to optimize public bicycle distribution, encourage green transit, and provide transparent per-hour pricing in Indian Rupees (₹).
+                </p>
+            </div>
+
+            <!-- Problem Statement & Mission -->
+            <div class="row g-4 mb-5 align-items-center">
+                <div class="col-lg-6">
+                    <h3 class="fw-bold mb-3 text-dark"><i class="bi bi-bullseye text-primary me-2"></i>Mission & Purpose</h3>
+                    <p class="text-muted">
+                        Urban congestion and last-mile connectivity remain major challenges for modern commuters. The <strong>Public Bicycle Rental Management System (PBRMS)</strong> provides a real-time, centralized platform connecting city commuters, bicycle fleet owners, and municipal transit administrators.
+                    </p>
+                    <p class="text-muted">
+                        The platform guarantees data consistency through atomic database transactions, enforces strict role-based access control, and maintains an auditable simulated payment ledger for all transactions.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-light text-dark border p-2"><i class="bi bi-check-circle-fill text-success me-1"></i>Zero Carbon Transit</span>
+                        <span class="badge bg-light text-dark border p-2"><i class="bi bi-check-circle-fill text-success me-1"></i>Real-Time Station Telemetry</span>
+                        <span class="badge bg-light text-dark border p-2"><i class="bi bi-check-circle-fill text-success me-1"></i>Automated Rupee (₹) Fare Calculation</span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm p-4 bg-white">
+                        <h5 class="fw-bold mb-3"><i class="bi bi-shield-lock text-primary me-2"></i>Platform Architecture & Security</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="bi bi-layers text-primary fs-5 me-3"></i>
+                                <div>
+                                    <strong>Python Flask REST Architecture:</strong> Modular Blueprints for Authentication, Docking Stations, Bicycles, Rentals, Payments, and Administration.
+                                </div>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start">
+                                <i class="bi bi-key text-primary fs-5 me-3"></i>
+                                <div>
+                                    <strong>Authentication & Role-Based Access:</strong> 12-round bcrypt password hashing and JWT token verification protecting user, owner, and admin portals.
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-start">
+                                <i class="bi bi-database-check text-primary fs-5 me-3"></i>
+                                <div>
+                                    <strong>Relational Database & ORM:</strong> Robust schema with foreign key constraints, automatic cascade checks, and atomic transaction handling.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 Core Roles Section -->
+            <div class="mb-5">
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold">Three Specialized User Portals</h3>
+                    <p class="text-muted">Tailored workflows for each participant in the bicycle rental ecosystem</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 p-4 border-0 shadow-sm text-center">
+                            <div class="fs-1 text-primary mb-3"><i class="bi bi-person-circle"></i></div>
+                            <h5 class="fw-bold">1. Customer / Commuter</h5>
+                            <p class="text-muted small">
+                                Search docking stations, filter available bicycles by type, rent instantaneously with atomic reservation, monitor live elapsed ride duration, and review fare receipts.
+                            </p>
+                            <a href="/register.html" class="btn btn-outline-primary btn-sm mt-auto">Customer Portal</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 p-4 border-0 shadow-sm text-center">
+                            <div class="fs-1 text-success mb-3"><i class="bi bi-shop"></i></div>
+                            <h5 class="fw-bold">2. Rental Owner</h5>
+                            <p class="text-muted small">
+                                Register commercial bicycle fleets, set customized hourly rental rates in Rupees (₹), assign bicycles to stations with capacity tracking, and toggle maintenance status.
+                            </p>
+                            <a href="/register.html" class="btn btn-outline-success btn-sm mt-auto">Owner Registration</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 p-4 border-0 shadow-sm text-center">
+                            <div class="fs-1 text-danger mb-3"><i class="bi bi-shield-check"></i></div>
+                            <h5 class="fw-bold">3. System Administrator</h5>
+                            <p class="text-muted small">
+                                Oversee citywide docking stations, review and approve/reject rental owner applications, audit fleet utilization KPIs, and monitor the simulated payment ledger.
+                            </p>
+                            <a href="/login.html" class="btn btn-outline-danger btn-sm mt-auto">Admin Console</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fare Calculation & Business Rules -->
+            <div class="card border-0 shadow-sm p-4 bg-light mb-5">
+                <div class="row align-items-center">
+                    <div class="col-md-7">
+                        <span class="badge bg-primary px-3 py-1 rounded-pill mb-2">Transparent Pricing</span>
+                        <h4 class="fw-bold mb-2">Indian Rupee (₹) Fare Formula</h4>
+                        <p class="text-muted mb-2">
+                            PBRMS charges riders strictly according to actual elapsed ride duration:
+                        </p>
+                        <div class="p-3 bg-white rounded border font-monospace fw-bold text-dark mb-2">
+                            Total Fare (₹) = Duration (Hours) × Bicycle Hourly Rate (min 1.0 hr)
+                        </div>
+                        <ul class="text-muted small mb-0">
+                            <li><strong>Minimum Billable Threshold:</strong> Any rental under 60 minutes is billed for 1 hour to prevent micro-billing anomalies (e.g. ₹15.00 min).</li>
+                            <li><strong>Fractional Calculation:</strong> Longer rides are calculated to two decimal places (e.g. 1 hr 30 mins at ₹20/hr = ₹30.00).</li>
+                            <li><strong>Simulated Ledger:</strong> Upon bike docking, a payment record is immediately recorded with status <code>Paid (Simulated)</code>.</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5 text-center">
+                        <div class="p-4 bg-white rounded shadow-sm border">
+                            <i class="bi bi-currency-rupee fs-1 text-success mb-2"></i>
+                            <h6 class="fw-bold mb-1">Affordable City Commutes</h6>
+                            <p class="small text-muted mb-0">
+                                Rates start from just ₹15 / hour for standard city cycles up to ₹40 / hour for electric-assist bicycles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center py-4 bg-white rounded shadow-sm border">
+                <h4 class="fw-bold mb-2">Ready to explore PBRMS?</h4>
+                <p class="text-muted mb-3">Browse live docking stations or try a demo account to experience the full workflow.</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="/stations.html" class="btn btn-primary px-4"><i class="bi bi-search me-1"></i>Browse Stations</a>
+                    <a href="/login.html" class="btn btn-outline-dark px-4"><i class="bi bi-box-arrow-in-right me-1"></i>Sign In</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center bg-dark text-white">
+        <div class="container">
+            <p class="mb-1 text-light"><strong>Public Bicycle Rental Management System (PBRMS)</strong></p>
+            <p class="small text-muted mb-0">Smart, affordable, and eco-friendly urban mobility for everyone.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/api.js"></script>
+</body>
+</html>
