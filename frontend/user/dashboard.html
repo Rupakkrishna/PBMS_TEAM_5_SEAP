@@ -17,7 +17,7 @@
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/index.html">
                 <i class="bi bi-bicycle brand-icon fs-3"></i>
-                <span>PBRMS</span>
+                <span class="ms-1">PBRMS</span>
                 <span class="badge bg-secondary ms-2 small">Customer Portal</span>
             </a>
             <div class="ms-auto d-flex align-items-center gap-3">
@@ -40,22 +40,26 @@
         <div class="card border-0 shadow-sm mb-4">
             <div class="card-header bg-white py-3">
                 <div class="row align-items-center g-2">
-                    <div class="col-md-5">
-                        <h4 class="fw-bold mb-0">
-                            <i class="bi bi-bicycle text-primary me-2"></i>Available Bicycles
-                        </h4>
-                        <small class="text-muted">Select an available bicycle from any docking station to start riding</small>
-                    </div>
                     <div class="col-md-4">
-                        <label class="visually-hidden" for="stationFilter">Filter by Station</label>
-                        <select class="form-select form-select-sm" id="stationFilter">
-                            <option value="">All Stations</option>
-                        </select>
+                        <h4 class="fw-bold mb-0">Available Bicycles</h4>
+                        <small class="text-muted">Browse & filter by docking station, bicycle type, or number</small>
                     </div>
                     <div class="col-md-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-white"><i class="bi bi-search text-muted"></i></span>
+                            <input type="text" class="form-control" id="bikeSearchInput" placeholder="Search number, type, station...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="visually-hidden" for="stationFilter">Filter by Station</label>
+                        <select class="form-select form-select-sm" id="stationFilter">
+                            <option value="">All Docking Stations</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
                         <label class="visually-hidden" for="typeFilter">Filter by Type</label>
                         <select class="form-select form-select-sm" id="typeFilter">
-                            <option value="">All Bicycle Types</option>
+                            <option value="">All Types</option>
                             <option value="City">City</option>
                             <option value="Road">Road</option>
                             <option value="Mountain">Mountain</option>
@@ -75,14 +79,15 @@
             </div>
         </div>
 
-        <!-- Rental History Section -->
+        <!-- Rental & Payment History Section -->
         <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                <h5 class="fw-bold mb-0">
-                    <i class="bi bi-clock-history text-secondary me-2"></i>Rental & Payment History
-                </h5>
+            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <div>
+                    <h5 class="fw-bold mb-0">Rental & Payment History</h5>
+                    <small class="text-muted">Itemized audit of departures, returns, duration, and digital receipts in Indian Rupees (₹)</small>
+                </div>
                 <button class="btn btn-outline-secondary btn-sm" onclick="loadRentalHistory()">
-                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh History
                 </button>
             </div>
             <div class="card-body p-0">
@@ -96,9 +101,9 @@
                                 <th>Returned Station</th>
                                 <th>Start Time</th>
                                 <th>Duration</th>
-                                <th>Total Fare</th>
+                                <th>Total Fare (₹)</th>
                                 <th>Rental Status</th>
-                                <th>Payment</th>
+                                <th>Payment Status</th>
                             </tr>
                         </thead>
                         <tbody id="rentalHistoryTableBody">
@@ -117,16 +122,14 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title fw-bold">
-                        <i class="bi bi-bicycle me-2"></i>Confirm Bicycle Rental
-                    </h5>
+                    <h5 class="modal-title fw-bold mb-0">Confirm Bicycle Rental</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div id="rentAlertContainer"></div>
                     <div class="list-group list-group-flush mb-3">
                         <div class="list-group-item d-flex justify-content-between px-0">
-                            <span class="text-muted">Bicycle:</span>
+                            <span class="text-muted">Bicycle Number:</span>
                             <span class="fw-bold" id="modalBikeNumber">-</span>
                         </div>
                         <div class="list-group-item d-flex justify-content-between px-0">
@@ -134,7 +137,7 @@
                             <span class="fw-semibold" id="modalBikeType">-</span>
                         </div>
                         <div class="list-group-item d-flex justify-content-between px-0">
-                            <span class="text-muted">Station:</span>
+                            <span class="text-muted">Departure Station:</span>
                             <span class="fw-semibold" id="modalStationName">-</span>
                         </div>
                         <div class="list-group-item d-flex justify-content-between px-0">
@@ -144,7 +147,7 @@
                     </div>
                     <div class="alert alert-info py-2 small mb-0">
                         <i class="bi bi-info-circle me-1"></i>
-                        Billing starts upon confirmation with a 1-hour minimum billable duration. You can return the bicycle to any station with free docking capacity.
+                        Active rentals allow 1 concurrent bicycle per rider until safely docked at a station. A minimum 1.0 hour billing threshold applies.
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -162,9 +165,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title fw-bold">
-                        <i class="bi bi-box-arrow-down-left me-2"></i>Return Bicycle
-                    </h5>
+                    <h5 class="modal-title fw-bold mb-0">Return Bicycle & Calculate Fare</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
@@ -176,22 +177,24 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="returnStationSelect" class="form-label fw-semibold">Select Destination Docking Station</label>
+                        <label for="returnStationSelect" class="form-label fw-semibold">
+                            Select Destination Docking Station
+                        </label>
                         <select class="form-select" id="returnStationSelect" required>
                             <option value="" disabled selected>Loading stations...</option>
                         </select>
-                        <div class="form-text small">Station capacity is strictly enforced. Full stations cannot accept returns.</div>
+                        <div class="form-text small">Station capacity is monitored in real-time. Full stations cannot accept bicycle returns.</div>
                     </div>
 
                     <div class="alert alert-success py-2 small mb-0">
-                        <i class="bi bi-credit-card me-1"></i>
-                        Upon return, rental duration and fare are computed automatically, and simulated payment will be processed.
+                        <i class="bi bi-calculator me-1"></i>
+                        Final fare will be calculated in Indian Rupees (₹) based on elapsed ride duration upon return.
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-danger fw-semibold" id="confirmReturnBtn" onclick="confirmReturn()">
-                        Confirm Return & Complete Payment
+                        Confirm Return & Complete Ride
                     </button>
                 </div>
             </div>
@@ -203,16 +206,16 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow">
                 <div class="modal-header bg-success text-white">
-                    <h5 class="modal-title fw-bold">
-                        <i class="bi bi-receipt me-2"></i>Rental Return Receipt
-                    </h5>
+                    <h5 class="modal-title fw-bold mb-0">Ride Receipt & Fare Breakdown</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4 text-center">
                     <div class="display-6 text-success mb-2">
                         <i class="bi bi-check-circle-fill"></i>
                     </div>
-                    <h4 class="fw-bold mb-3">Rental Completed Successfully!</h4>
+                    <h4 class="fw-bold mb-1">Rental Returned Successfully!</h4>
+                    <small class="text-muted d-block mb-3">Your ride is complete and receipt has been recorded</small>
+
                     <div class="card bg-light border-0 p-3 mb-3 text-start">
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-muted">Bicycle:</span>
@@ -227,7 +230,10 @@
                             <span class="fw-semibold" id="receiptRate">-</span>
                         </div>
                         <div class="d-flex justify-content-between mb-2 pt-2 border-top">
-                            <span class="fw-bold">Total Fare:</span>
+                            <div>
+                                <span class="fw-bold">Total Fare:</span>
+                                <div class="small text-muted">Duration × Hourly Rate (min 1 hr)</div>
+                            </div>
                             <span class="fw-bold fs-4 text-primary" id="receiptFare">-</span>
                         </div>
                         <div class="d-flex justify-content-between align-items-center pt-2 border-top">
@@ -235,10 +241,10 @@
                             <span id="receiptPaymentStatus">-</span>
                         </div>
                     </div>
-                    <p class="text-muted small mb-0">The bicycle is now docked and available for other riders. Thank you for riding green!</p>
+                    <p class="text-muted small mb-0">The bicycle is now docked and available at the destination station for other riders.</p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">Close Receipt</button>
                 </div>
             </div>
         </div>
@@ -250,4 +256,3 @@
     <script src="/js/user.js"></script>
 </body>
 </html>
-

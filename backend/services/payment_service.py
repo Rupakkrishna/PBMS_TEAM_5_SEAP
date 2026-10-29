@@ -38,6 +38,17 @@ def get_payment_by_id(payment_id: int):
     """
     return query_db(query, (payment_id,), one=True)
 
+def get_payment_by_rental_id(rental_id: int):
+    """Retrieve payment record associated with a rental ID."""
+    query = """
+        SELECT p.payment_id, p.rental_id, p.amount, p.status, p.payment_date, p.created_at,
+               r.user_id, r.bicycle_id, r.duration, r.fare
+        FROM payment p
+        JOIN rental r ON p.rental_id = r.rental_id
+        WHERE p.rental_id = %s
+    """
+    return query_db(query, (rental_id,), one=True)
+
 def update_payment_status(payment_id: int, status: str):
     """Update simulated payment status."""
     if status not in VALID_PAYMENT_STATUSES:
