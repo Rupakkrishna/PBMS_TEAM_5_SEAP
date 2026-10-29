@@ -1,0 +1,29 @@
+Name                                  Stmts   Miss  Cover   Missing
+-------------------------------------------------------------------
+backend\app.py                           79     30    62%   57, 61-68, 73-75, 79-81, 85-87, 92, 97-99, 104-115
+backend\config.py                        33      0   100%
+backend\database\db.py                  108     33    69%   24-47, 81-84, 102-108, 118-120, 236-243
+backend\database\seed.py                 30      2    93%   15, 83
+backend\extensions.py                     2      0   100%
+backend\models\__init__.py                6      0   100%
+backend\models\bicycle.py                15      1    93%   20
+backend\models\payment.py                12      1    92%   15
+backend\models\rental.py                 17      1    94%   22
+backend\models\station.py                15      1    93%   20
+backend\models\user.py                   35      3    91%   14, 36, 61
+backend\routes\admin_routes.py           52      3    94%   78-79, 95
+backend\routes\auth_routes.py            59     12    80%   15, 23, 27, 31, 35, 43, 57, 71, 77-80
+backend\routes\bicycle_routes.py         83     27    67%   14-25, 42, 52, 56, 62-63, 67, 71, 100-103, 106-109, 111, 123, 131-139
+backend\routes\payment_routes.py         35     17    51%   13, 17, 25-32, 38-49
+backend\routes\qa_routes.py             144     21    85%   319-320, 343-344, 365, 495-496, 502-503, 510-511, 521-522, 533, 541, 552-553, 569, 577-579
+backend\routes\rental_routes.py          64     14    78%   18, 22-23, 47, 51-52, 72-80, 90, 92
+backend\routes\station_routes.py         58      8    86%   30, 41, 45, 53, 64, 68, 77, 87
+backend\services\auth_service.py         64     14    78%   14-15, 24, 27, 54, 93, 123-131
+backend\services\bicycle_service.py     100     44    56%   9-34, 53-54, 56-58, 82, 85, 90, 111, 115, 118, 122, 134, 136, 154, 160-176
+backend\services\payment_service.py      24      9    62%   28-39, 54-65
+backend\services\rental_service.py       82     16    80%   16-17, 20-23, 54, 75, 100, 103, 107, 112, 218-219, 221-222
+backend\services\station_service.py      34      5    85%   28, 40, 43, 55, 63
+backend\utils\auth_middleware.py         45      6    87%   24-27, 39, 44
+backend\utils\validators.py              45     14    69%   9, 12, 18, 20, 26, 29, 35, 40, 42, 50-51, 54, 56-57
+-------------------------------------------------------------------
+TOTAL                                  1241    282    77%
