@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station & Bicycle Search - PBRMS</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-pbrms sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/index.html">
+                <i class="bi bi-bicycle brand-icon fs-3"></i>
+                <span>PBRMS</span>
+                <span class="badge bg-primary ms-2 small">Stations & Fleet</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-dismiss="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/stations.html">Stations & Bicycles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about.html">About & Pricing</a></li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <a href="/login.html" class="btn btn-outline-light btn-sm px-3">Sign In</a>
+                    <a href="/register.html" class="btn btn-primary btn-sm px-3">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content py-5">
+        <div class="container">
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                <div>
+                    <h2 class="fw-bold mb-0">Docking Stations & Bicycle Search</h2>
+                    <p class="text-muted mb-0 mt-1">Live station capacity telemetry and available bicycle inventory</p>
+                </div>
+                <a href="/login.html" class="btn btn-primary">
+                    <i class="bi bi-bicycle me-1"></i> Rent a Bike (Customer Portal)
+                </a>
+            </div>
+
+            <!-- Search & Filter Controls (PB-11) -->
+            <div class="card border-0 shadow-sm p-4 bg-white mb-4">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-5">
+                        <label for="stationSearchInput" class="form-label fw-semibold small text-muted">Keyword Search</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
+                            <input type="text" class="form-control" id="stationSearchInput" placeholder="Search bicycle #, type, station, or address...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="stationFilterSelect" class="form-label fw-semibold small text-muted">Filter by Station</label>
+                        <select class="form-select" id="stationFilterSelect">
+                            <option value="">All Docking Stations</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="typeFilterSelect" class="form-label fw-semibold small text-muted">Bicycle Type</label>
+                        <select class="form-select" id="typeFilterSelect">
+                            <option value="">All Types</option>
+                            <option value="City">City</option>
+                            <option value="Road">Road</option>
+                            <option value="Mountain">Mountain</option>
+                            <option value="Electric">Electric</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button class="btn btn-outline-secondary w-100" onclick="clearFilters()">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs: Stations vs Available Bicycles -->
+            <ul class="nav nav-pills mb-4" id="stationPills">
+                <li class="nav-item">
+                    <button class="nav-link active fw-semibold" id="tabBikes" onclick="switchView('bikes')">
+                        <i class="bi bi-bicycle me-1"></i> Available Bicycles (<span id="bikesCount">0</span>)
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link fw-semibold" id="tabStations" onclick="switchView('stations')">
+                        <i class="bi bi-geo-alt me-1"></i> Docking Stations (<span id="stationsCount">0</span>)
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Bicycles View -->
+            <div id="bikesView">
+                <div class="row g-4" id="bicyclesGrid">
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-primary" role="status"></div>
+                        <p class="text-muted mt-2">Loading available fleet bicycles...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stations View (Initially Hidden) -->
+            <div id="stationsView" class="d-none">
+                <div class="row g-4" id="stationsGrid">
+                    <div class="col-12 text-center py-5">
+                        <div class="spinner-border text-primary" role="status"></div>
+                        <p class="text-muted mt-2">Loading docking stations...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center">
+        <div class="container">
+            <p class="mb-1 text-light"><strong>Public Bicycle Rental Management System (PBRMS)</strong></p>
+            <p class="small text-muted mb-0">Built with HTML5, Bootstrap 5, Flask REST API & MySQL 8. Designed for SE & Agile demonstration.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/api.js"></script>
+    <script>
+        let allStations = [];
+        let allBicycles = [];
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadData();
+
+            document.getElementById('stationSearchInput').addEventListener('input', applyFilters);
+            document.getElementById('stationFilterSelect').addEventListener('change', applyFilters);
+            document.getElementById('typeFilterSelect').addEventListener('change', applyFilters);
+        });
+
+        async function loadData() {
+            try {
+                const [stations, bikes] = await Promise.all([
+                    api.get('/stations'),
+                    api.get('/bicycles/available')
+                ]);
+
+                allStations = stations || [];
+                allBicycles = bikes || [];
+
+                document.getElementById('stationsCount').innerText = allStations.length;
+                document.getElementById('bikesCount').innerText = allBicycles.length;
+
+                // Populate select
+                const sel = document.getElementById('stationFilterSelect');
+                sel.innerHTML = '<option value="">All Docking Stations</option>';
+                allStations.forEach(s => {
+                    sel.innerHTML += `<option value="${s.station_id}">${s.station_name} (${s.available_bicycles}/${s.capacity} docked)</option>`;
+                });
+
+                renderStations(allStations);
+                renderBicycles(allBicycles);
+            } catch (err) {
+                console.error('Failed to load data:', err);
+            }
+        }
+
+        function applyFilters() {
+            const q = (document.getElementById('stationSearchInput').value || '').toLowerCase().trim();
+            const stationId = document.getElementById('stationFilterSelect').value;
+            const type = document.getElementById('typeFilterSelect').value;
+
+            const filteredBikes = allBicycles.filter(b => {
+                const matchStation = !stationId || b.station_id == stationId;
+                const matchType = !type || b.type === type;
+                const matchQuery = !q ||
+                    b.bicycle_number.toLowerCase().includes(q) ||
+                    b.type.toLowerCase().includes(q) ||
+                    (b.station_name && b.station_name.toLowerCase().includes(q)) ||
+                    (b.station_location && b.station_location.toLowerCase().includes(q));
+                return matchStation && matchType && matchQuery;
+            });
+
+            document.getElementById('bikesCount').innerText = filteredBikes.length;
+            renderBicycles(filteredBikes);
+
+            const filteredStations = allStations.filter(s => {
+                const matchStation = !stationId || s.station_id == stationId;
+                const matchQuery = !q ||
+                    s.station_name.toLowerCase().includes(q) ||
+                    s.location.toLowerCase().includes(q);
+                return matchStation && matchQuery;
+            });
+            document.getElementById('stationsCount').innerText = filteredStations.length;
+            renderStations(filteredStations);
+        }
+
+        function clearFilters() {
+            document.getElementById('stationSearchInput').value = '';
+            document.getElementById('stationFilterSelect').value = '';
+            document.getElementById('typeFilterSelect').value = '';
+            applyFilters();
+        }
+
+        function switchView(view) {
+            const bikesView = document.getElementById('bikesView');
+            const stationsView = document.getElementById('stationsView');
+            const tabBikes = document.getElementById('tabBikes');
+            const tabStations = document.getElementById('tabStations');
+
+            if (view === 'bikes') {
+                bikesView.classList.remove('d-none');
+                stationsView.classList.add('d-none');
+                tabBikes.classList.add('active');
+                tabStations.classList.remove('active');
+            } else {
+                bikesView.classList.add('d-none');
+                stationsView.classList.remove('d-none');
+                tabBikes.classList.remove('active');
+                tabStations.classList.add('active');
+            }
+        }
+
+        function renderBicycles(bikes) {
+            const container = document.getElementById('bicyclesGrid');
+            if (!bikes || bikes.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-bicycle fs-1 text-muted"></i>
+                        <h5 class="fw-bold mt-2">No available bicycles found</h5>
+                        <p class="text-muted small">Try clearing or relaxing your search filters.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = bikes.map(b => `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm stat-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title fw-bold mb-0">${b.bicycle_number}</h5>
+                                <span class="badge bg-light text-primary border fw-semibold">${b.type}</span>
+                            </div>
+                            <p class="text-muted small mb-1">
+                                <i class="bi bi-geo-alt text-danger me-1"></i> Station: <strong>${b.station_name}</strong>
+                            </p>
+                            <p class="text-muted small mb-3">
+                                <i class="bi bi-person text-muted me-1"></i> Owner: ${b.owner_name}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                                <div>
+                                    <span class="fs-4 fw-bold text-primary">${formatCurrency(b.rental_rate)}</span>
+                                    <small class="text-muted">/ hr</small>
+                                </div>
+                                <a href="/login.html" class="btn btn-primary btn-sm px-3">
+                                    <i class="bi bi-lightning-charge me-1"></i> Rent Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderStations(stations) {
+            const container = document.getElementById('stationsGrid');
+            if (!stations || stations.length === 0) {
+                container.innerHTML = '<div class="col-12 text-center py-5 text-muted">No stations found.</div>';
+                return;
+            }
+
+            container.innerHTML = stations.map(s => {
+                const percent = s.capacity > 0 ? Math.round((s.available_bicycles / s.capacity) * 100) : 0;
+                const freeSlots = s.capacity - s.available_bicycles;
+                return `
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0 stat-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="card-title fw-bold text-truncate mb-0">${s.station_name}</h5>
+                                    <span class="badge ${s.available_bicycles > 0 ? 'bg-success' : 'bg-danger'}">
+                                        ${s.available_bicycles} Avail
+                                    </span>
+                                </div>
+                                <p class="text-muted small mb-3"><i class="bi bi-geo-alt me-1"></i>${s.location}</p>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between small text-muted mb-1">
+                                        <span>Capacity: <strong>${s.available_bicycles} / ${s.capacity}</strong></span>
+                                        <span>${freeSlots} slots free</span>
+                                    </div>
+                                    <div class="progress" style="height: 6px;">
+                                        <div class="progress-bar ${percent > 50 ? 'bg-success' : (percent > 20 ? 'bg-warning' : 'bg-danger')}"
+                                             role="progressbar" style="width: ${percent}%"></div>
+                                    </div>
+                                </div>
+                                <a href="/login.html" class="btn btn-outline-primary btn-sm w-100 ${s.available_bicycles === 0 ? 'disabled' : ''}">
+                                    ${s.available_bicycles > 0 ? '<i class="bi bi-bicycle me-1"></i>Rent from Station' : 'Station Empty'}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>
+
